@@ -16,7 +16,16 @@ const index = (req, res) => {
 
 // show
 const show = (req, res) => {
-  res.send(`dettaglio movie ${req.params.id}`);
+  const { id } = req.params;
+  const sql = "SELECT * FROM movies WHERE id = ?";
+  connection.query(sql, [id], (err, resultBook) => {
+    if (err) {
+      return res
+        .status(500)
+        .jason({ error: "errore nell'esecuzione della query:" + err });
+    }
+    res.send(resultBook[0]);
+  });
 };
 
 module.exports = {
