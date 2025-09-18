@@ -17,7 +17,14 @@ const index = (req, res) => {
 // show
 const show = (req, res) => {
   const { id } = req.params;
+
+  // query per libro
   const sql = "SELECT * FROM movies WHERE id = ?";
+
+  // query per review
+  const sqlReview = "SELECT * FROM reviews WHERE movie_id = ?";
+
+  // eseguo query per libro
   connection.query(sql, [id], (err, resultMovie) => {
     if (err) {
       return res
@@ -25,10 +32,24 @@ const show = (req, res) => {
         .jason({ error: "errore nell'esecuzione della query:" + err });
     }
     // controllo se non trovo il movie
-    if(resultMovie.length === 0){
-      return res.status(404).json({error: "movie not Found"})
+    if (resultMovie.length === 0) {
+      return res.status(404).json({ error: "movie not Found" });
     }
-    res.send(resultMovie[0]);
+
+    connection.query(sqlReview, [id], (err, resultReview) => {
+      if (err) {
+        return res
+          .status(500)
+          .jason({ error: "errore nell'esecuzione della query:" + err });
+      }
+      // creo un nuovo oggetto con dati del movie e l'array delle recensioni
+      const movieWithReviews = {
+        ...resultMovie[0],
+        reviews: resultReview
+      }
+
+      res.send(movieWithReviews);
+    });
   });
 };
 
