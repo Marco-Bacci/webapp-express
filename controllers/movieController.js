@@ -1,17 +1,17 @@
 // importo la connessione al db
-const connection = require("..data/db");
+const connection = require("../data/db")
 
 // index
 const index = (req, res) => {
-  console.log("metodo index");
+  res.send("lista movies");
 };
 
 // show
 const show = (req, res) => {
-  console.log("metodo show");
+  res.send(`dettaglio movie ${req.params.id}`);
 };
 
-module.export = {
+module.exports = {
   index,
   show,
 };
