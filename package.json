@@ -1,0 +1,17 @@
+{
+  "name": "webapp-express",
+  "version": "1.0.0",
+  "description": "===\r Esercizio:",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.15.0",
+    "start": "node app.js",
+    "watch": " node --watch app.js"
+  }
+}
