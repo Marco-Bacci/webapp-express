@@ -4,6 +4,8 @@ const app = express();
 
 const port = process.env.PORT;
 
+app.use(express.static('public'))
+
 // rotta base
 app.get('/',(req,res)=>{
   res.send("rotta base del mio blog")
