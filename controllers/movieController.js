@@ -18,13 +18,17 @@ const index = (req, res) => {
 const show = (req, res) => {
   const { id } = req.params;
   const sql = "SELECT * FROM movies WHERE id = ?";
-  connection.query(sql, [id], (err, resultBook) => {
+  connection.query(sql, [id], (err, resultMovie) => {
     if (err) {
       return res
         .status(500)
         .jason({ error: "errore nell'esecuzione della query:" + err });
     }
-    res.send(resultBook[0]);
+    // controllo se non trovo il movie
+    if(resultMovie.length === 0){
+      return res.status(404).json({error: "movie not Found"})
+    }
+    res.send(resultMovie[0]);
   });
 };
 
