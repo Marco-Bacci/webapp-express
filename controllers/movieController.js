@@ -42,11 +42,14 @@ const show = (req, res) => {
           .status(500)
           .jason({ error: "errore nell'esecuzione della query:" + err });
       }
+
       // creo un nuovo oggetto con dati del movie e l'array delle recensioni
       const movieWithReviews = {
         ...resultMovie[0],
-        reviews: resultReview
-      }
+        reviews: resultReview,
+        image: "http://localhost:3000/imgs/" + resultMovie[0].image,
+      };
+      console.log(movieWithReviews);
 
       res.send(movieWithReviews);
     });
