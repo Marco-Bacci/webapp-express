@@ -22,7 +22,7 @@ const show = (req, res) => {
   const sql = "SELECT * FROM movies WHERE id = ?";
 
   // query per review
-  const sqlReview = "SELECT * FROM reviews WHERE movie_id = ?";
+  const sqlReview = "SELECT text FROM reviews WHERE movie_id = ?";
 
   // eseguo query per libro
   connection.query(sql, [id], (err, resultMovie) => {
